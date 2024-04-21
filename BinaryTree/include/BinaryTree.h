@@ -147,7 +147,7 @@ void BinaryTree<T>::Add(T elem)
 
     else
     {
-        node* temp = root->left;
+        node* temp = root;
         while(1)
         {
             if(temp->left == NULL)
