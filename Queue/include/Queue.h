@@ -104,7 +104,7 @@ T Queue<T>::Delete()
 {
     if(this->IsEmpty())
     {
-        perror("Queue is empty\n");
+        perror("Queue is empty");
         return NULL;
     }
 
