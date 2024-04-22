@@ -19,6 +19,7 @@ int main(int argc,char* argv[])
     tree->Add(4);
     tree->Add(6);
     tree->Add(5);
+ 
 
     tree->setoutfunc(out);
 
@@ -28,7 +29,13 @@ int main(int argc,char* argv[])
 
     // tree->PostOrderTraversal();
 
-    tree->LevelOrderTraversal();
+    // tree->LevelOrderTraversal();
+
+    // tree->InOrderTraversal_stack();
+
+    // tree->PreOrderTraversal_stack();
+
+    tree->PostOrderTraversal_stack();
 }
 
 

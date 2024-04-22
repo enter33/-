@@ -6,6 +6,7 @@
 #include <unistd.h>
 #include <iostream>
 #include <queue>
+#include <stack>
 
 template<typename T>
 class BinaryTree
@@ -60,6 +61,15 @@ public:
 
     /*层序遍历*/
     void LevelOrderTraversal();
+
+    /*栈实现中序遍历,无需递归*/
+    void InOrderTraversal_stack();
+
+    /*栈实现前序遍历,无需递归*/
+    void PreOrderTraversal_stack();
+
+    /*栈实现后序遍历,无需递归*/
+    void PostOrderTraversal_stack();
 };
 
 template<typename T>
@@ -326,6 +336,103 @@ void BinaryTree<T>::LevelAdd(node* Elem)
         this->leafnode.push(elem->right);
         return;
     }
+}
+
+
+template<typename T>
+void BinaryTree<T>::InOrderTraversal_stack()
+{
+    if(this->isempty)
+    {
+        return;
+    }
+
+    std::stack<node*> S;
+
+    node* temp = this->root;
+    while(temp || !S.empty())
+    {
+        while(temp)
+        {
+            S.push(temp);
+            temp = temp->left;
+        }
+
+        temp = S.top();
+        S.pop();
+        this->output(temp->data);
+        temp = temp->right;
+    }
+
+}
+
+
+template<typename T>
+void BinaryTree<T>::PreOrderTraversal_stack()
+{
+    if(this->isempty)
+    {
+        return;
+    }
+
+    std::stack<node*> S;
+
+    node* temp = this->root;
+    while(temp || !S.empty())
+    {
+        while(temp)
+        {
+            this->output(temp->data);
+            S.push(temp);
+            temp = temp->left;
+        }
+
+        temp = S.top();
+        S.pop();
+        temp = temp->right;
+    }
+
+}
+
+
+template<typename T>
+void BinaryTree<T>::PostOrderTraversal_stack()
+{
+    if(this->isempty)
+    {
+        return;
+    }
+
+    std::stack<node*> S;
+
+    node* temp = this->root;
+    node* last;
+    while(temp || !S.empty())
+    {
+        while(temp)
+        {
+            S.push(temp);
+            temp = temp->left;
+        }
+
+        temp = S.top();
+        
+        if(temp->right && temp->right != last)
+        {
+            temp = temp->right;
+        }
+        else
+        {
+            this->output(temp->data);
+            S.pop();
+            last = temp;
+            temp = NULL;
+        }
+        
+
+        // sleep(1);
+    }
+
 }
 
 #endif /*__BINARYTREE_H__*/
