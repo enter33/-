@@ -8,7 +8,7 @@ void out(int data);
 
 int main(int argc,char* argv[])
 {
-    BinaryTree<int>* tree = new BinaryTree<int>(compare);
+    BinaryTree<int>* tree = new BinaryTree<int>();
 
     // printf("1\n");
 

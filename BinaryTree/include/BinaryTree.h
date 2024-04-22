@@ -32,7 +32,11 @@ private:
 
     void LevelOrder(std::queue<node*>);
 
+    void LevelAdd(node*);
+
     bool isempty;
+
+    std::queue<node*> leafnode;
     
 public:
     BinaryTree(/* args */);
@@ -108,6 +112,7 @@ void BinaryTree<T>::Add(T elem)
         this->root->data = elem;
         free(Elem);
         this->isempty = false;
+        this->leafnode.push(this->root);
         
         return;
     }
@@ -147,24 +152,7 @@ void BinaryTree<T>::Add(T elem)
 
     else
     {
-        node* temp = root;
-        while(1)
-        {
-            if(temp->left == NULL)
-            {
-                temp->left = Elem;
-                return;
-            }
-            else if(temp->right == NULL)
-            {
-                temp->right = Elem;
-                return;
-            }
-            else
-            {
-                temp = temp->left;
-            }
-        }
+        LevelAdd(Elem);
     }
 }
 
@@ -317,6 +305,27 @@ void BinaryTree<T>::LevelOrder(std::queue<node*> Qelems)
 
     LevelOrder(Q);
 
+}
+
+
+template<typename T>
+void BinaryTree<T>::LevelAdd(node* Elem)
+{
+    node* elem = this->leafnode.front();
+
+    if(elem->left == NULL)
+    {
+        elem->left = Elem;
+        this->leafnode.push(elem->left);
+        return;
+    }
+    else if(elem->right == NULL)
+    {
+        elem->right = Elem;
+        this->leafnode.pop();
+        this->leafnode.push(elem->right);
+        return;
+    }
 }
 
 #endif /*__BINARYTREE_H__*/
