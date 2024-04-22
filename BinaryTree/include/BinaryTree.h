@@ -7,6 +7,9 @@
 #include <iostream>
 #include <queue>
 #include <stack>
+#include <math.h>
+
+#define MAX(a,b) a>b?a:b
 
 template<typename T>
 class BinaryTree
@@ -34,6 +37,8 @@ private:
     void LevelOrder(std::queue<node*>);
 
     void LevelAdd(node*);
+
+    int PostGetHeight(node*);
 
     bool isempty;
 
@@ -70,6 +75,8 @@ public:
 
     /*栈实现后序遍历,无需递归*/
     void PostOrderTraversal_stack();
+
+    int getHeight();
 };
 
 template<typename T>
@@ -433,6 +440,30 @@ void BinaryTree<T>::PostOrderTraversal_stack()
         // sleep(1);
     }
 
+}
+
+
+template<typename T>
+int BinaryTree<T>::getHeight()
+{
+    if(this->isempty)
+    {
+        return 0;
+    }
+    return this->PostGetHeight(this->root);
+
+}
+
+
+template<typename T>
+int BinaryTree<T>::PostGetHeight(node* elem)
+{
+    if(elem)
+    {
+        return (MAX(this->PostGetHeight(elem->left),this->PostGetHeight(elem->right))+1);       
+    }
+
+    return 0;
 }
 
 #endif /*__BINARYTREE_H__*/

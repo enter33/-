@@ -35,7 +35,9 @@ int main(int argc,char* argv[])
 
     // tree->PreOrderTraversal_stack();
 
-    tree->PostOrderTraversal_stack();
+    // tree->PostOrderTraversal_stack();
+
+    printf("%d\n",tree->getHeight());
 }
 
 
