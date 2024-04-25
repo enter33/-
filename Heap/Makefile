@@ -1,7 +1,7 @@
 CC=g++
 CFLAGS=-Wall -std=c++11
 
-SRC=*.cpp  
+SRC=*.cpp  ./include/*.cpp
 
 TARGET=main
 
